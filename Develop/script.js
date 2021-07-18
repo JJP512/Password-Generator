@@ -10,10 +10,61 @@ var getPasswordLength = function() {
   return length
 };
 // Assignment code here
+var passwordElements = function() {
+  var length = getPasswordLength();
+  var lower = confirm("Add lowercase characters?");
+  var upper = confirm("Add uppercase characters?");
+  var numeric = confirm("Add numeric characters?");
+  var special = confirm("Add special characters?");
+  var elements = 0
+
+  if (upper) {
+    elements++;
+  }
+  if (numeric) {
+    elements++;
+  }
+  if (special) {
+    elements++;
+  }
+  if (lower) {
+    elements++
+  }
+
+  var numCharacters = Math.floor(length / elements);
+  
+  var passwordInfo = {
+    len: length,
+    low: lower,
+    up: upper,
+    num: numeric,
+    spec: special,
+    numChar: numCharacters
+  };
+
+  return passwordInfo;
+};
+
+var getUppercase = function(num) {
+  var upperCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  var upperEl = "";
+  for (var i = 0; i < num; i++) {
+    upperEl += upperCharacters[Math.floor(Math.random() * 25)];
+  }
+  return upperEl;
+};
+
 var generatePassword = function() {
-  length = getPasswordLength();
-  console.log(length);
-}
+  var passwordInfo = passwordElements();
+  var password = "";
+  var passwordLength = passwordInfo.len;
+
+  if (passwordInfo.up) {
+    password += getUppercase(passwordInfo.numChar);
+    passwordLength -= passwordInfo.numChar;
+  }
+  console.log(passwordLength);
+};
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
 
