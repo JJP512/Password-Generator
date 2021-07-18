@@ -81,6 +81,18 @@ var getLowercase = function(num) {
   return lowerEl;
 };
 
+var randomize = function(password) {
+  var finalPass = "";
+  var originalPass = password;
+  for (var i = 0; i < password.length; i++) {
+    remainingChars = originalPass.length;
+    newChar = originalPass[Math.floor(Math.random() * remainingChars)];
+    finalPass += newChar;
+    originalPass = originalPass.replace(newChar, '');
+  }
+  return finalPass;
+}
+
 var generatePassword = function() {
   var passwordInfo = passwordElements();
   var password = "";
@@ -101,7 +113,8 @@ var generatePassword = function() {
   if (passwordInfo.low) {
     password += getLowercase(passwordLength);
   }
-  console.log(password);
+
+  return randomize(password)
 };
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
