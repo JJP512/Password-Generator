@@ -54,6 +54,33 @@ var getUppercase = function(num) {
   return upperEl;
 };
 
+var getNumerical = function(num) {
+  var numericalCharacters = "0123456789";
+  var numEl = "";
+  for (var i = 0; i < num; i++) {
+    numEl += numericalCharacters[Math.floor(Math.random() * 9)];
+  }
+  return numEl;
+};
+
+var getSpecial = function(num) {
+  var specialCharacters = "!#$%&@?/][~+=-*";
+  var specEl = "";
+  for (var i = 0; i < num; i++) {
+    specEl += specialCharacters[Math.floor(Math.random() * 14)];
+  }
+  return specEl;
+};
+
+var getLowercase = function(num) {
+  var lowerCharacters = "abcdefghijklmnopqrstuvwxyz";
+  var lowerEl = "";
+  for (var i = 0; i < num; i++) {
+    lowerEl += lowerCharacters[Math.floor(Math.random() * 25)];
+  }
+  return lowerEl;
+};
+
 var generatePassword = function() {
   var passwordInfo = passwordElements();
   var password = "";
@@ -63,7 +90,18 @@ var generatePassword = function() {
     password += getUppercase(passwordInfo.numChar);
     passwordLength -= passwordInfo.numChar;
   }
-  console.log(passwordLength);
+  if (passwordInfo.num) {
+    password += getNumerical(passwordInfo.numChar);
+    passwordLength -= passwordInfo.numChar;
+  }
+  if (passwordInfo.spec) {
+    password += getSpecial(passwordInfo.numChar);
+    passwordLength -= passwordInfo.numChar;
+  }
+  if (passwordInfo.low) {
+    password += getLowercase(passwordLength);
+  }
+  console.log(password);
 };
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
