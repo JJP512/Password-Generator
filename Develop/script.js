@@ -1,3 +1,4 @@
+// receives password length from user and confirms it is a valid input
 var getPasswordLength = function() {
   length = "";
   while (length === "" || length === null) {
@@ -9,7 +10,7 @@ var getPasswordLength = function() {
   }
   return length
 };
-// Assignment code here
+// receives password elements wanted from user
 var passwordElements = function() {
   var length = getPasswordLength();
   var lower = confirm("Add lowercase characters?");
@@ -32,7 +33,7 @@ var passwordElements = function() {
   }
 
   var numCharacters = Math.floor(length / elements);
-  
+  // converts elements collected into an object
   var passwordInfo = {
     len: length,
     low: lower,
@@ -41,10 +42,10 @@ var passwordElements = function() {
     spec: special,
     numChar: numCharacters
   };
-
+  // object is then returned to generate function
   return passwordInfo;
 };
-
+// returns given number of randomly selected uppercase characters
 var getUppercase = function(num) {
   var upperCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   var upperEl = "";
@@ -53,7 +54,7 @@ var getUppercase = function(num) {
   }
   return upperEl;
 };
-
+// returns given number of randomly selected numerical characters
 var getNumerical = function(num) {
   var numericalCharacters = "0123456789";
   var numEl = "";
@@ -62,7 +63,7 @@ var getNumerical = function(num) {
   }
   return numEl;
 };
-
+// returns given number of randomly selected special characters
 var getSpecial = function(num) {
   var specialCharacters = "!#$%&@?/][~+=-*";
   var specEl = "";
@@ -71,7 +72,7 @@ var getSpecial = function(num) {
   }
   return specEl;
 };
-
+// returns given number of randomly selected lowercase characters
 var getLowercase = function(num) {
   var lowerCharacters = "abcdefghijklmnopqrstuvwxyz";
   var lowerEl = "";
@@ -81,6 +82,7 @@ var getLowercase = function(num) {
   return lowerEl;
 };
 
+// original password is rewritten in randomized order for finalized password
 var randomize = function(password) {
   var finalPass = "";
   var originalPass = password;
@@ -93,6 +95,7 @@ var randomize = function(password) {
   return finalPass;
 }
 
+// receives chosen password elements and creates characters per element
 var generatePassword = function() {
   var passwordInfo = passwordElements();
   var password = "";
@@ -113,7 +116,7 @@ var generatePassword = function() {
   if (passwordInfo.low) {
     password += getLowercase(passwordLength);
   }
-
+  // password sent to be randomized to strengthen further
   return randomize(password)
 };
 // Get references to the #generate element
